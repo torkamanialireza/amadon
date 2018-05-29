@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>amadon</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style media="screen">
+  fieldset.left{
+    width:70%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  fieldset.right{
+    width:28%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  td {
+    border-right:black solid 1px;
+  }
+  tr:nth-child(even){
+    background-color: #f2f2f2;
+  }
+  .first {
+    background-color: #94f189 !important;
+  }
+
+</style>
+  </head>
+  <body>
+    <h1>Amadon Store !</h1>
+
+    <!-- <a href="amadon/checkout">checkout</a> -->
+    <fieldset class="left">
+        <table class="table">
+          <thead>
+            <tr class="first">
+              <td>Item</td>
+              <td>Price</td>
+              <td>Actions | <a href="/reset">Purchase again</a> | <a href="amadon/checkout">Checkout</a> </td>
+            </tr>
+          </thead>
+          <tbody>
+          <form  action="/buy" method="post">
+            {% csrf_token %}
+          <tr>
+            <td>Dojo T-shirt</td>
+            <td><input type="hidden" name="product_id" value="1001"/>$19.99</td>
+            <input type="hidden" name="product_name" value="Dojo T-shirt"/>
+            <td>
+              <select name='quantity'>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+              </select>
+              <input type="submit" name="submit" value="buy">
+            </td>
+          </tr>
+        </form>
+              <form  action="/buy" method="post">
+                {% csrf_token %}
+                <tr>
+              <td>Dojo Sweater</td>
+              <td><input type="hidden" name="product_id" value="1002"/>$29.99</td>
+              <input type="hidden" name="product_name" value="Dojo Sweater"/>
+              <td>
+                <select name='quantity'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <input type="submit" name="submit" value="buy">
+              </td>
+            </tr>
+          </form>
+        </form>
+        <form  action="/buy" method="post">
+          {% csrf_token %}
+            <tr>
+              <td>Dojo Cup</td>
+              <td><input type="hidden" name="product_id" value="1003"/>$4.99</td>
+              <input type="hidden" name="product_name" value="Dojo Cup"/>
+              <td>
+                <select name='quantity'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <input type="submit" name="submit" value="buy">
+              </td>
+            </tr>
+        </form>
+        <form  action="/buy" method="post">
+          {% csrf_token %}
+            <tr>
+              <td>Algoritm Book</td>
+              <td><input type="hidden" name="product_id" value="1004"/>$49.99</td>
+              <input type="hidden" name="product_name" value="Algoritm Book"/>
+              <td>
+                <select name='quantity'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <input type="submit" name="submit" value="buy">
+              </td>
+            </tr>
+          </form>
+        </tbody>
+      </table>
+    </fieldset>
+    <fieldset class="right">
+      {% load static %}
+      <table class="table">
+        <thead>
+          <tr class="first">
+            <td>Item</td>
+            <td>We charged You</td>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in request.session.products %}
+          <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+          </tr>
+          {% endfor %}
+          <tr class="first">
+            <td>Total of Purchase</td>
+            <td>Total of orders</td>
+          </tr>
+          <tr>
+            <td>{{request.session.total}}</td>
+            <td>{{request.session.numbers}}</td>
+          </tr>
+        </tbody>
+      </tabel>
+    </fieldset>
+
+
+  </body>
+</html>
